@@ -1,5 +1,3 @@
-const { response } = require("express")
-
 $(document).ready(function() {
     $('#title').autocomplete({
         source: async function(req,res) {
@@ -8,12 +6,12 @@ $(document).ready(function() {
                             .then(results => results.json())
                             .then(results => results.map(x => {
                                 return {
-                                    label: results.title,
-                                    value: results.title,
-                                    id: results._id
+                                    label: x.title,
+                                    value: x.title,
+                                    id: x._id
                                 }
                             }))
-                        response(data)
+                        res(data)
         },
         minLength: 2,
         select: function(e, ui) {
@@ -24,7 +22,7 @@ $(document).ready(function() {
                 .then(x => {
                     $('#cast').empty()
                     x.cast.forEach(c => {
-                        $(cast).append(`<li>${cast}</li>`)
+                        $("#cast").append(`<li>${c}</li>`)
                     })
                     $('img').attr('src', x.poster)
                 })

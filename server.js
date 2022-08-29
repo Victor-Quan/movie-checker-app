@@ -25,9 +25,9 @@ app.get("/search", async (req, res) => {
     try {
         let result = await collection.aggregate([
             {
-                "$Search": {
+                "$search": {
                     "autocomplete": {
-                        "query": `${request.query.query}`,
+                        "query": `${req.query.query}`,
                         "path": "title",
                         "fuzzy": {
                             "maxEdits": 2,
@@ -46,7 +46,7 @@ app.get("/search", async (req, res) => {
 app.get("/get/:id", async (req, res) => {
     try {
         let result = await collection.findOne({
-            "_id": ObjectId(request.params.id)
+            "_id": ObjectId(req.params.id)
         })
         res.send(result)
     } catch (error) {
